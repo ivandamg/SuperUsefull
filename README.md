@@ -4,6 +4,22 @@
 # 1. Touch all files
 find  -type f  -name "*" -exec touch {} +
 
+# 2. Extract list of genes by gene id.
+
+1. Select Only first field of gene ID
+        
+        cat Mesculenta_305_v6.1.protein.fa | cut -d' ' -f1 > Mesculenta_305_v6.1.protein_v2.fa
+
+2. convert to unix gene-id.file
+
+        dos2unix DualRNAseq_Cassava_DE_ALL_treatments_conserved_51genes.txt
+
+3. faidx 
+
+        #pip install pyfaidx
+        faidx -d '|' Mesculenta_305_v6.1.protein_v2.fa $(tr '\n' ' ' < DualRNAseq_Cassava_DE_ALL_treatments_conserved_51genes.txt) > Cassava_conserved_51genes.fa
+        
+        
 # 2. nb of elements within folder
 find . -type d -print0 | while read -d '' -r dir; do
     files=("$dir"/*)
