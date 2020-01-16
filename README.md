@@ -6,6 +6,11 @@ find  -type f  -name "*" -exec touch {} +
 
 # 2. Extract list of genes by gene id.
 
+
+0. Extract only 1 scaffold by name 
+
+                perl -ne 'if(/^>(\S+)/){$c=grep{/^$1$/}qw(id1 id2)}print if $c' fasta.file
+
 1. Select Only first field of gene ID
         
         cat Mesculenta_305_v6.1.protein.fa | cut -d' ' -f1 > Mesculenta_305_v6.1.protein_v2.fa
